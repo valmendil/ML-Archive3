@@ -1,0 +1,200 @@
+preprocess the data ...
+- number of features:435
+- number of examples in total:1743
+- number of examples used for training:1394
+- number of examples used for testing:349
+
+-----------------------------------------------------------------------
+
+# Tuning hyper-parameters for the baseline
+
+Fitting 3 folds for each of 100 candidates, totalling 300 fits
+[Parallel(n_jobs=1)]: Done 300 out of 300 | elapsed:    8.3s finished
+
+Best parameters set found on development set:
+{'alpha': 1.6297508346206451}
+
+Grid scores on development set (r2):
+
+0.627 (+/-0.085) for {'alpha': 0.001}
+0.626 (+/-0.084) for {'alpha': 0.0011497569953977356}
+0.626 (+/-0.084) for {'alpha': 0.0013219411484660286}
+0.626 (+/-0.084) for {'alpha': 0.0015199110829529332}
+0.627 (+/-0.084) for {'alpha': 0.0017475284000076829}
+0.627 (+/-0.084) for {'alpha': 0.002009233002565048}
+0.627 (+/-0.084) for {'alpha': 0.0023101297000831605}
+0.627 (+/-0.084) for {'alpha': 0.0026560877829466868}
+0.626 (+/-0.084) for {'alpha': 0.0030538555088334154}
+0.626 (+/-0.084) for {'alpha': 0.0035111917342151308}
+0.627 (+/-0.084) for {'alpha': 0.0040370172585965534}
+0.626 (+/-0.083) for {'alpha': 0.0046415888336127824}
+0.626 (+/-0.083) for {'alpha': 0.0053366992312063122}
+0.626 (+/-0.082) for {'alpha': 0.0061359072734131761}
+0.626 (+/-0.082) for {'alpha': 0.007054802310718645}
+0.626 (+/-0.082) for {'alpha': 0.0081113083078968723}
+0.626 (+/-0.081) for {'alpha': 0.0093260334688321997}
+0.626 (+/-0.081) for {'alpha': 0.010722672220103232}
+0.626 (+/-0.080) for {'alpha': 0.012328467394420659}
+0.626 (+/-0.079) for {'alpha': 0.014174741629268055}
+0.626 (+/-0.079) for {'alpha': 0.016297508346206444}
+0.626 (+/-0.078) for {'alpha': 0.018738174228603841}
+0.626 (+/-0.077) for {'alpha': 0.021544346900318846}
+0.626 (+/-0.077) for {'alpha': 0.024770763559917114}
+0.626 (+/-0.076) for {'alpha': 0.028480358684358019}
+0.622 (+/-0.086) for {'alpha': 0.032745491628777282}
+0.623 (+/-0.085) for {'alpha': 0.037649358067924674}
+0.624 (+/-0.084) for {'alpha': 0.043287612810830593}
+0.625 (+/-0.085) for {'alpha': 0.049770235643321115}
+0.624 (+/-0.093) for {'alpha': 0.057223676593502172}
+0.626 (+/-0.093) for {'alpha': 0.065793322465756823}
+0.626 (+/-0.101) for {'alpha': 0.075646332755462911}
+0.629 (+/-0.102) for {'alpha': 0.086974900261778343}
+0.631 (+/-0.109) for {'alpha': 0.10000000000000001}
+0.633 (+/-0.114) for {'alpha': 0.11497569953977356}
+0.637 (+/-0.114) for {'alpha': 0.13219411484660287}
+0.639 (+/-0.116) for {'alpha': 0.1519911082952933}
+0.642 (+/-0.113) for {'alpha': 0.17475284000076849}
+0.646 (+/-0.110) for {'alpha': 0.20092330025650479}
+0.649 (+/-0.105) for {'alpha': 0.23101297000831603}
+0.652 (+/-0.101) for {'alpha': 0.26560877829466867}
+0.656 (+/-0.096) for {'alpha': 0.30538555088334157}
+0.660 (+/-0.091) for {'alpha': 0.35111917342151311}
+0.663 (+/-0.085) for {'alpha': 0.40370172585965536}
+0.665 (+/-0.079) for {'alpha': 0.4641588833612782}
+0.668 (+/-0.072) for {'alpha': 0.53366992312063122}
+0.673 (+/-0.063) for {'alpha': 0.61359072734131759}
+0.676 (+/-0.055) for {'alpha': 0.70548023107186453}
+0.679 (+/-0.050) for {'alpha': 0.81113083078968728}
+0.679 (+/-0.047) for {'alpha': 0.93260334688321989}
+0.681 (+/-0.041) for {'alpha': 1.0722672220103231}
+0.685 (+/-0.028) for {'alpha': 1.2328467394420659}
+0.687 (+/-0.021) for {'alpha': 1.4174741629268048}
+0.687 (+/-0.014) for {'alpha': 1.6297508346206451}
+0.687 (+/-0.007) for {'alpha': 1.873817422860385}
+0.684 (+/-0.002) for {'alpha': 2.1544346900318843}
+0.683 (+/-0.007) for {'alpha': 2.4770763559917115}
+0.679 (+/-0.012) for {'alpha': 2.8480358684358018}
+0.675 (+/-0.017) for {'alpha': 3.2745491628777286}
+0.668 (+/-0.013) for {'alpha': 3.7649358067924674}
+0.662 (+/-0.009) for {'alpha': 4.3287612810830618}
+0.656 (+/-0.011) for {'alpha': 4.9770235643321135}
+0.651 (+/-0.012) for {'alpha': 5.72236765935022}
+0.646 (+/-0.015) for {'alpha': 6.5793322465756825}
+0.642 (+/-0.018) for {'alpha': 7.5646332755462904}
+0.635 (+/-0.019) for {'alpha': 8.6974900261778352}
+0.628 (+/-0.019) for {'alpha': 10.0}
+0.617 (+/-0.018) for {'alpha': 11.497569953977356}
+0.606 (+/-0.019) for {'alpha': 13.219411484660288}
+0.590 (+/-0.020) for {'alpha': 15.199110829529332}
+0.573 (+/-0.027) for {'alpha': 17.475284000076829}
+0.554 (+/-0.029) for {'alpha': 20.092330025650458}
+0.530 (+/-0.032) for {'alpha': 23.101297000831579}
+0.503 (+/-0.036) for {'alpha': 26.560877829466893}
+0.472 (+/-0.038) for {'alpha': 30.538555088334185}
+0.433 (+/-0.040) for {'alpha': 35.111917342151344}
+0.394 (+/-0.031) for {'alpha': 40.370172585965577}
+0.360 (+/-0.030) for {'alpha': 46.415888336127821}
+0.322 (+/-0.029) for {'alpha': 53.366992312063125}
+0.280 (+/-0.031) for {'alpha': 61.359072734131757}
+0.237 (+/-0.027) for {'alpha': 70.548023107186452}
+0.183 (+/-0.028) for {'alpha': 81.113083078968728}
+0.117 (+/-0.028) for {'alpha': 93.26033468832199}
+0.052 (+/-0.006) for {'alpha': 107.22672220103232}
+0.001 (+/-0.007) for {'alpha': 123.28467394420659}
+-0.007 (+/-0.020) for {'alpha': 141.74741629268047}
+-0.006 (+/-0.016) for {'alpha': 162.97508346206433}
+-0.004 (+/-0.009) for {'alpha': 187.3817422860383}
+-0.002 (+/-0.004) for {'alpha': 215.44346900318865}
+-0.001 (+/-0.001) for {'alpha': 247.7076355991714}
+-0.001 (+/-0.002) for {'alpha': 284.80358684358049}
+-0.003 (+/-0.005) for {'alpha': 327.45491628777319}
+-0.002 (+/-0.005) for {'alpha': 376.49358067924715}
+-0.002 (+/-0.005) for {'alpha': 432.87612810830615}
+-0.002 (+/-0.005) for {'alpha': 497.70235643321138}
+-0.002 (+/-0.005) for {'alpha': 572.23676593502205}
+-0.003 (+/-0.005) for {'alpha': 657.93322465756819}
+-0.003 (+/-0.005) for {'alpha': 756.46332755462902}
+-0.003 (+/-0.004) for {'alpha': 869.74900261778339}
+-0.003 (+/-0.004) for {'alpha': 1000.0}
+
+Result:
+
+RMSE: 310.4388
+
+-----------------------------------------------------------------------
+
+# Tuning hyper-parameters for all features
+
+skip cv ... (set DO_CV1 to True if you wish to use it)
+
+Result:
+
+RMSE: 241.1478
+
+-----------------------------------------------------------------------
+
+Thresh=0.059, n=1, RMSE: 536.38%
+Thresh=0.052, n=2, RMSE: 375.39%
+Thresh=0.025, n=2, RMSE: 375.39%
+Thresh=0.024, n=3, RMSE: 374.32%
+Thresh=0.021, n=5, RMSE: 357.50%
+Thresh=0.018, n=6, RMSE: 310.03%
+Thresh=0.017, n=7, RMSE: 299.49%
+Thresh=0.016, n=10, RMSE: 294.14%
+Thresh=0.014, n=11, RMSE: 289.83%
+Thresh=0.013, n=11, RMSE: 289.83%
+Thresh=0.012, n=15, RMSE: 288.21%
+Thresh=0.011, n=20, RMSE: 298.27%
+Thresh=0.010, n=27, RMSE: 296.07%
+Thresh=0.009, n=28, RMSE: 294.52%
+Thresh=0.008, n=30, RMSE: 273.24%
+Thresh=0.007, n=38, RMSE: 250.48%
+Thresh=0.006, n=51, RMSE: 259.39%
+Thresh=0.005, n=71, RMSE: 269.99%
+Thresh=0.004, n=81, RMSE: 259.61%
+Thresh=0.003, n=101, RMSE: 252.21%
+Thresh=0.002, n=125, RMSE: 256.87%
+Thresh=0.001, n=170, RMSE: 253.87%
+Thresh=0.000, n=435, RMSE: 254.89%
+-> best score for 38 features and a threshold of 0.007
+
+retrain xgboost with the selected features
+Gridsearch on dev.set ...
+Fitting 3 folds for each of 10000 candidates, totalling 30000 fits
+[Parallel(n_jobs=20)]: Done  10 tasks      | elapsed:    2.9s
+[Parallel(n_jobs=20)]: Done 160 tasks      | elapsed:   55.0s
+[Parallel(n_jobs=20)]: Done 410 tasks      | elapsed:  2.1min
+[Parallel(n_jobs=20)]: Done 760 tasks      | elapsed:  4.0min
+[Parallel(n_jobs=20)]: Done 1210 tasks      | elapsed:  6.3min
+[Parallel(n_jobs=20)]: Done 1760 tasks      | elapsed:  8.8min
+[Parallel(n_jobs=20)]: Done 2410 tasks      | elapsed: 11.9min
+[Parallel(n_jobs=20)]: Done 3160 tasks      | elapsed: 15.7min
+[Parallel(n_jobs=20)]: Done 4010 tasks      | elapsed: 20.7min
+[Parallel(n_jobs=20)]: Done 4960 tasks      | elapsed: 26.3min
+[Parallel(n_jobs=20)]: Done 6010 tasks      | elapsed: 31.3min
+[Parallel(n_jobs=20)]: Done 7160 tasks      | elapsed: 37.4min
+[Parallel(n_jobs=20)]: Done 8410 tasks      | elapsed: 43.7min
+[Parallel(n_jobs=20)]: Done 9760 tasks      | elapsed: 50.7min
+[Parallel(n_jobs=20)]: Done 11210 tasks      | elapsed: 58.9min
+[Parallel(n_jobs=20)]: Done 12760 tasks      | elapsed: 68.3min
+[Parallel(n_jobs=20)]: Done 14410 tasks      | elapsed: 76.8min
+[Parallel(n_jobs=20)]: Done 16160 tasks      | elapsed: 85.9min
+[Parallel(n_jobs=20)]: Done 18010 tasks      | elapsed: 95.8min
+[Parallel(n_jobs=20)]: Done 19960 tasks      | elapsed: 105.6min
+[Parallel(n_jobs=20)]: Done 22010 tasks      | elapsed: 116.0min
+[Parallel(n_jobs=20)]: Done 24160 tasks      | elapsed: 126.6min
+[Parallel(n_jobs=20)]: Done 26410 tasks      | elapsed: 138.9min
+[Parallel(n_jobs=20)]: Done 28760 tasks      | elapsed: 151.5min
+[Parallel(n_jobs=20)]: Done 30000 out of 30000 | elapsed: 159.0min finished
+Best parameters set found on development set:
+{'reg_alpha': 0.1, 'learning_rate': 0.05, 'n_estimators': 500, 'subsample': 0.9, 'max_depth': 4, 'gamma': 0.15}
+Result:
+RMSE: 241.0397
+
+-----------------------------------------------------------------------
+
+retrain xgb-model with the entire training set
+load validation set
+make prediction
+done
+

@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+# usage: analyze <groundtruth.png> <prediction.png> <output.png>
+#
+# The input images should be 608x608 grayscale, or comparable.
+
+
+import matplotlib.image as mpimg
+import numpy as np
+import os.path
+import scipy.ndimage as ndi
+import sys
+
+
+PATCHSIZE = 16
+THRESHOLD = 0.25
+
+
+def main():
+
+    groundtruth_filename = sys.argv[1] # input
+    prediction_filename = sys.argv[2] # input
+    output_filename = sys.argv[3] # output
+
+    g = _load(groundtruth_filename)
+    p = _load(prediction_filename)
+
+    x, y = g.shape
+    N = np.logical_not
+
+    img = np.ones((x, y, 3)) # true negative (white, background)
+    img[np.logical_and(g, p)] = [0.875, 0.875, 0.875] # true positive
+    img[np.logical_and(N(g), p)] = [1, 0.5, 0] # false positive
+    img[np.logical_and(g, N(p))] = [1, 0, 0.5] # false negative
+
+    _save(output_filename, img)
+
+
+def _load(fn):
+
+    img = mpimg.imread(fn)
+
+    if img.ndim == 3 and img.shape[2] == 4:
+        img = img[:,:,:3] # remove alpha channel
+
+    if img.ndim == 3:
+        img = img.mean(axis=2) # mean RGB to grayscale
+
+    assert img.ndim == 2
+
+    out = np.zeros((img.shape[0]//PATCHSIZE, img.shape[1]//PATCHSIZE))
+
+    for y in range(0, img.shape[0], PATCHSIZE):
+        for x in range(0, img.shape[1], PATCHSIZE):
+            patch = img[y:y+PATCHSIZE,x:x+PATCHSIZE]
+            out[y//PATCHSIZE,x//PATCHSIZE] = patch.mean()
+
+    out = out > THRESHOLD
+
+    assert out.shape == (38, 38) # ?
+    assert out.dtype == bool
+
+    out = np.repeat(np.repeat(out, PATCHSIZE, axis=1), PATCHSIZE, axis=0)
+
+    return out
+
+
+def _save(fn, img):
+
+    mpimg.imsave(fn, img)
+
+
+if __name__ == '__main__':
+    main()

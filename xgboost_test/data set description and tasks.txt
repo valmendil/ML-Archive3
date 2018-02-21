@@ -1,0 +1,28 @@
+The dataset contains daily visitor data from a leisure attraction located at the border of two counties in Germany.
+For some features, no description is available, so they may be dummy features (also called 1-hot encoded variables, binary indicators,...), numerical features, etc., but not categorical ones.
+For the following features we provide additional information:
+
+
+school holiday: 
+0 = no school holiday
+1 = school holiday only in county #1
+2 = school holiday only in county #2
+3 = school holiday both in county #1 and in county #2
+
+
+bank holiday:
+0 = no bank holiday
+1 = bank holiday only in county #1
+2 = bank holiday only in county #2
+3 = bank holiday both in county #1 and in county #2
+
+
+Additionally, daily weather data for the location of the leisure attraction is provided.
+
+
+The task is to predict the column called 'label' for the test set.
+We will measure the prediction error using the (root-)mean-squared error ((R)MSE) metric.
+You may use any programming language and freely available libraries to solve this task.
+
+An appropriate baseline will give an RMSE of approx. 500.
+
