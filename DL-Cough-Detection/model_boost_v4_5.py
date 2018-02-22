@@ -5,7 +5,7 @@ import tensorflow.contrib.slim as slim
 import numpy as np
 import os, sys, math, shutil, time, threading
 
-from utils import simple_arg_scope, batchnorm_arg_scope
+from utils import simple_arg_scope, batchnorm_arg_scope, softmax_cross_entropy
 
 
 """
@@ -61,8 +61,7 @@ def classify(inputs,
 
 
 def loss_fkt(logits, y):
-        return tf.reduce_mean(tf.losses.softmax_cross_entropy(logits = logits, onehot_labels = y, label_smoothing=0.05)) 
-
+        return tf.reduce_mean(softmax_cross_entropy(logits = logits, onehot_labels = y, label_smoothing=0.05)) 
 
 
 def build_model(x, 

@@ -8,7 +8,9 @@ import tensorflow.contrib.slim as slim
 import os, fnmatch, sys
 #plt.style.use('ggplot')
 
-
+from tensorflow.python.framework import ops
+from tensorflow.python.ops import math_ops, nn, array_ops
+from tensorflow.python.ops.losses.losses_impl import compute_weighted_loss, Reduction
 
 
 
@@ -56,6 +58,38 @@ def batchnorm_arg_scope(batch_norm_decay=0.997,
       normalizer_params=batch_norm_params):
     with slim.arg_scope([slim.batch_norm], **batch_norm_params) as arg_sc:
         return arg_sc
+
+
+
+def softmax_cross_entropy(
+    onehot_labels, logits, weights=1.0, label_smoothing=0, scope=None,
+    loss_collection=ops.GraphKeys.LOSSES,
+    reduction=Reduction.SUM_BY_NONZERO_WEIGHTS):
+  if onehot_labels is None:
+    raise ValueError("onehot_labels must not be None.")
+  if logits is None:
+    raise ValueError("logits must not be None.")
+  with ops.name_scope(scope, "softmax_cross_entropy_loss",
+                      (logits, onehot_labels, weights)) as scope:
+    logits = ops.convert_to_tensor(logits)
+    onehot_labels = math_ops.cast(onehot_labels, logits.dtype)
+    logits.get_shape().assert_is_compatible_with(onehot_labels.get_shape())
+
+    if label_smoothing > 0:
+      num_classes = math_ops.cast(
+          array_ops.shape(onehot_labels)[1], logits.dtype)
+      smooth_positives = 1.0 - label_smoothing
+      smooth_negatives = label_smoothing / num_classes
+      onehot_labels = onehot_labels * smooth_positives + smooth_negatives
+
+    losses = nn.softmax_cross_entropy_with_logits_v2(labels=onehot_labels,
+                                                  logits=logits,
+                                                  name="xentropy")
+    return compute_weighted_loss(
+losses, weights, scope, loss_collection, reduction=reduction)
+
+
+
 
 
 def clip_grads(grads_and_vars, clipper=5.):
