@@ -12,13 +12,13 @@ from input_pipeline import *
 
 #******************************************************************************************************************
 
-from model_cnn_v1 import *
+#from model_cnn_weak import *
 #from model_cnn_v2 import *
 #from model_cnn_v3_3 import *
 #from model_cnn_v4 import *
 #from model_resnet_v1 import *
 #from model_densenet_v1 import *
-#from model_boost_v4 import *
+from model_boost_v4_5 import *
 #from model_boost_v4_6 import *
 #from model_bag_v1 import *
 #from model_boost_v1 import *
@@ -37,14 +37,24 @@ def train(train_data,
          eta=2e-3, #learning rate
          grad_noise=1e-3,
          clipper=10.,
-         checkpoint_dir='./checkpoints/cnn_v1.02',
+         #checkpoint_dir='./checkpoints/test',
+         #checkpoint_dir='./checkpoints/cnn_v1.02',
+         #checkpoint_dir='./checkpoints/cnn_v2.9',
+         #checkpoint_dir='./checkpoints/cnn_v3.3x1',
+         #checkpoint_dir='./checkpoints/rnn_v1.03',
+         #checkpoint_dir='./checkpoints/rnn_v2.01',
+         #checkpoint_dir='./checkpoints/resnet_v1.0',
+         #checkpoint_dir='./checkpoints/dense_v1.0',
+         checkpoint_dir='./checkpoints/boost_v4.5x',
+         #checkpoint_dir='./checkpoints/weak_v1.1k',
+         #checkpoint_dir='./checkpoints/boost_v1.0',
          batch_size=64,
-         n_producer_threads=8,
+         n_producer_threads=12,
          trainable_scopes=TRAINABLE_SCOPES,
-         train_capacity=3500,
-         test_capacity=1000,
-         max_steps = 150000,
-         log_every_n_steps=100,
+         train_capacity=7500,
+         test_capacity=1500,
+         max_steps = 500000,
+         log_every_n_steps=200,
          eval_every_n_steps=100,
          save_every_n_steps=2000,
          save_checkpoint=True):
@@ -142,7 +152,8 @@ def train(train_data,
               test_summary_update = tf.group(acc_update, mpc_update, auc_update, prec_update, rec_update)
 
               #initialize
-              sess = tf.Session(graph=graph,config=tf.ConfigProto(inter_op_parallelism_threads=8))
+              gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.3)
+              sess = tf.Session(graph=graph, config=tf.ConfigProto(gpu_options=gpu_options))
               init = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
 
               with sess.as_default():
@@ -169,16 +180,12 @@ def train(train_data,
 
                 print ('start learning')
                 try:
-              	        #i=0
-              	        for i in range(max_steps): #while True:
-                                #i+=1
+              	        for i in range(max_steps): 
               		        #training
                                 _, step, train_loss_ = sess.run([train_op, global_step, train_loss])
-                                #print ('step: %d, idx: %d, train_loss: %f'% (step, i, train_loss_))
               			#logging: update training summary
                                 if i >= 300 and i%(log_every_n_steps) == 0:
                                         summary = sess.run([summary_op])[0]
-                                        #print ('step: %d, idx: %d'% (step, i))
                                         train_writer.add_summary(summary, step)
                            
               			#logging: update testing summary
@@ -194,16 +201,16 @@ def train(train_data,
 
                 except KeyboardInterrupt:
                       	        print("Manual interrupt occurred.")
-                      	        train_runner.close()
-                #finally:
-                      	        mpc_, accuracy_, loss_ = sess.run([mpc, accuracy, test_loss])
 
-                      	        print ('################################################################################')
-                      	        print ('Results - mpca:%f, accuracy:%f, loss:%f'%(mpc_,accuracy_,loss_))
-                      	        print ('################################################################################')
+                train_runner.close()
+                mpc_, accuracy_, loss_ = sess.run([mpc, accuracy, test_loss])
+
+                print ('################################################################################')
+                print ('Results - mpca:%f, accuracy:%f, loss:%f'%(mpc_,accuracy_,loss_))
+                print ('################################################################################')
         
-                      	        test_runner.close()
-                      	        sess.close()
+                test_runner.close()
+                sess.close()
 
 
     

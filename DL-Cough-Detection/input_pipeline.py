@@ -74,8 +74,8 @@ class CustomRunner(object):
     """
     def __init__(self,
        	data,
-       	batch_size = 32,
-       	load_batch_size = 32,
+       	batch_size = 64,
+       	load_batch_size = 64,
        	is_training = True,
        	capacity=1000,
        	min_after_dequeue=500,

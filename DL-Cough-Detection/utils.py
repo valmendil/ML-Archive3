@@ -82,7 +82,7 @@ def softmax_cross_entropy(
       smooth_negatives = label_smoothing / num_classes
       onehot_labels = onehot_labels * smooth_positives + smooth_negatives
 
-    losses = nn.softmax_cross_entropy_with_logits_v2(labels=onehot_labels,
+    losses = nn.softmax_cross_entropy_with_logits_v2(labels=tf.stop_gradient(onehot_labels),
                                                   logits=logits,
                                                   name="xentropy")
     return compute_weighted_loss(
